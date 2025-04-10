@@ -18,20 +18,20 @@ public class Transaction {
   }
 
   public double getAmount() {
-    return amount;
+    return amount; //these are pass by copy so we can just directly return here
   }
 
   public String getCategory() {
-    return category;
+    return category; //these are pass by copy so we can just directly return here
   }
   
   public String getTimestamp() {
-    return timestamp;
+    return timestamp; //these are pass by copy so we can just directly return here
   }
 
   // removed setter functions
 
-  
+
   private String generateTimestamp() {
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");  
     return sdf.format(new Date());
