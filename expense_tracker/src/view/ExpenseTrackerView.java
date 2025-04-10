@@ -16,6 +16,10 @@ public class ExpenseTrackerView extends JFrame {
 
   private JTable transactionsTable;
   private JButton addTransactionBtn;
+  private JButton filterCategoryBtn;
+  private JButton filterAmountBtn ;
+
+
   private JFormattedTextField amountField;
   private JTextField categoryField;
   private DefaultTableModel model;
@@ -41,6 +45,9 @@ public class ExpenseTrackerView extends JFrame {
     JLabel categoryLabel = new JLabel("Category:");
     categoryField = new JTextField(10);
 
+
+    filterCategoryBtn = new JButton("Filter by Category");
+    filterAmountBtn = new JButton("Filter by Amount");
     // Create table
     transactionsTable = new JTable(model);
   
@@ -51,6 +58,8 @@ public class ExpenseTrackerView extends JFrame {
     inputPanel.add(categoryLabel); 
     inputPanel.add(categoryField);
     inputPanel.add(addTransactionBtn);
+    inputPanel.add(filterCategoryBtn);
+    inputPanel.add(filterAmountBtn);
   
     JPanel buttonPanel = new JPanel();
     buttonPanel.add(addTransactionBtn);
