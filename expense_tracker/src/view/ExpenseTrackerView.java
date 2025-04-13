@@ -119,6 +119,12 @@ public class ExpenseTrackerView extends JFrame {
   public JButton getAddTransactionBtn() {
     return addTransactionBtn;
   }
+  public JButton getFilterCategoryBtn() {
+    return filterCategoryBtn;
+  }
+  public JButton getFilterAmountBtn() {
+    return filterAmountBtn;
+  }
 
   public DefaultTableModel getTableModel() {
     return model;
@@ -138,12 +144,25 @@ public class ExpenseTrackerView extends JFrame {
     }
   }
 
+  public double getAmountFilterField(){
+    if (amountFilterField.getText().isEmpty()) {
+      return 0;
+    } else {
+      double amount = Double.parseDouble(amountFilterField.getText());
+      return amount;
+    }
+  }
+
   public void setAmountField(JFormattedTextField amountField) {
     this.amountField = amountField;
   }
 
   public String getCategoryField() {
     return categoryField.getText();
+  }
+
+  public String getCategoryFilterField() {
+    return categoryFilterField.getText();
   }
 
   public void setCategoryField(JTextField categoryField) {

@@ -34,6 +34,19 @@ public class ExpenseTrackerApp {
       }
     });
 
+    view.getFilterCategoryBtn().addActionListener(e -> {
+      String category = view.getCategoryFilterField();
+      System.out.println(category);
+      controller.applyFilter("category", category);
+    });
+
+
+    view.getFilterAmountBtn().addActionListener(e -> {
+      double maxAmount = view.getAmountFilterField();
+      System.out.println(maxAmount);
+      controller.applyFilter("amount", String.valueOf(maxAmount));
+    });
+
   }
 
 }

@@ -4,6 +4,10 @@ import view.ExpenseTrackerView;
 
 import java.util.List;
 
+import model.TransactionFilter;
+import model.AmountFilter;
+import model.CategoryFilter;
+
 
 
 import model.ExpenseTrackerModel;
@@ -46,4 +50,18 @@ public class ExpenseTrackerController {
   }
   
   // Other controller methods
+
+  // the call to this function would look like applyFilter("amount", "100")
+  public void applyFilter(String filterType, String filterValue) {
+    List<Transaction> filteredTransactions = model.getTransactions();
+    if (filterType.equals("amount")) {
+      double maxAmount = Double.parseDouble(filterValue);
+      TransactionFilter filter = new AmountFilter(maxAmount);
+      filteredTransactions = filter.filter(model.getTransactions());
+    } else if (filterType.equals("category")) {
+      TransactionFilter filter = new CategoryFilter(filterValue);
+      filteredTransactions = filter.filter(model.getTransactions());
+    }
+    view.refreshTable(filteredTransactions);
+  }
 }
