@@ -37,14 +37,21 @@ public class ExpenseTrackerApp {
     view.getFilterCategoryBtn().addActionListener(e -> {
       String category = view.getCategoryFilterField();
       System.out.println(category);
-      controller.applyFilter("category", category);
+      boolean filtered = controller.applyFilter("category", category);
+      if (!filtered) {
+        JOptionPane.showMessageDialog(view, "Invalid category entered");
+        view.toFront();
+      }
     });
-
 
     view.getFilterAmountBtn().addActionListener(e -> {
       double maxAmount = view.getAmountFilterField();
       System.out.println(maxAmount);
-      controller.applyFilter("amount", String.valueOf(maxAmount));
+      boolean filtered = controller.applyFilter("amount", String.valueOf(maxAmount));
+      if (!filtered) {
+        JOptionPane.showMessageDialog(view, "Invalid amount entered");
+        view.toFront();
+      }
     });
 
   }

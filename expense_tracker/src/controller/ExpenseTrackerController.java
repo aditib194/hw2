@@ -8,12 +8,11 @@ import model.TransactionFilter;
 import model.AmountFilter;
 import model.CategoryFilter;
 
-
-
 import model.ExpenseTrackerModel;
 import model.Transaction;
+
 public class ExpenseTrackerController {
-  
+
   private ExpenseTrackerModel model;
   private ExpenseTrackerView view;
 
@@ -41,27 +40,34 @@ public class ExpenseTrackerController {
     if (!InputValidation.isValidCategory(category)) {
       return false;
     }
-    
+
     Transaction t = new Transaction(amount, category);
     model.addTransaction(t);
-    view.getTableModel().addRow(new Object[]{t.getAmount(), t.getCategory(), t.getTimestamp()});
+    view.getTableModel().addRow(new Object[] { t.getAmount(), t.getCategory(), t.getTimestamp() });
     refresh();
     return true;
   }
-  
+
   // Other controller methods
 
   // the call to this function would look like applyFilter("amount", "100")
-  public void applyFilter(String filterType, String filterValue) {
+  public boolean applyFilter(String filterType, String filterValue) {
     List<Transaction> filteredTransactions = model.getTransactions();
     if (filterType.equals("amount")) {
       double maxAmount = Double.parseDouble(filterValue);
+      if (!InputValidation.isValidAmount(maxAmount)) {
+        return false;
+      }
       TransactionFilter filter = new AmountFilter(maxAmount);
       filteredTransactions = filter.filter(model.getTransactions());
     } else if (filterType.equals("category")) {
+      if (!InputValidation.isValidCategory(filterValue)) {
+        return false;
+      }
       TransactionFilter filter = new CategoryFilter(filterValue);
       filteredTransactions = filter.filter(model.getTransactions());
     }
     view.refreshTable(filteredTransactions);
+    return true;
   }
 }
