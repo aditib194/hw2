@@ -50,14 +50,14 @@ public class ExpenseTrackerView extends JFrame {
 
     categoryFilterField = new JTextField(10);
 
-    JLabel amountFilterLabel = new JLabel("Filter Amount:");
+    JLabel amountFilterLabel = new JLabel("Filter Max Amount:");
 
     amountFilterField = new JFormattedTextField(format);
 
     amountFilterField.setColumns(10);
 
     filterCategoryBtn = new JButton("Filter by Category");
-    filterAmountBtn = new JButton("Filter by Amount");
+    filterAmountBtn = new JButton("Filter by Max Amount");
     // Create table
     transactionsTable = new JTable(model);
 

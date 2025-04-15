@@ -10,8 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import controller.ExpenseTrackerController;
-import model.ExpenseTrackerModel;
-import model.Transaction;
+import model.*;
 import view.ExpenseTrackerView;
 
 public class TestExample {
@@ -113,6 +112,32 @@ public class TestExample {
         // size should still be 0 and total cost should still be zero
         assertEquals(0, model.getTransactions().size());
         assertEquals(0.0, getTotalCost(), 0.01);
+
+    }
+
+    @Test
+    public void testFilterByMaxAmount() {
+        assertEquals(0, model.getTransactions().size());
+        assertEquals(0.0, getTotalCost(), 0.01);
+
+        controller.addTransaction(50, "food");
+        controller.addTransaction(837.5, "travel");
+        controller.addTransaction(79.99, "entertainment");
+        controller.addTransaction(50, "bills");
+
+        AmountFilter test = new AmountFilter(100);
+        List<Transaction> filteredTransactions = test.filter(model.getTransactions());
+
+        assertEquals("food", filteredTransactions.get(0).getCategory());
+        assertEquals(50, filteredTransactions.get(0).getAmount(), 0.01);
+
+        assertEquals("entertainment", filteredTransactions.get(1).getCategory());
+        assertEquals(79.99, filteredTransactions.get(1).getAmount(), 0.01);
+
+        assertEquals("bills", filteredTransactions.get(2).getCategory());
+        assertEquals(50, filteredTransactions.get(2).getAmount(), 0.01);
+
+        assertEquals(3, filteredTransactions.size());
 
     }
 
