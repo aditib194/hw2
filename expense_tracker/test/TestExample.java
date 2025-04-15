@@ -50,6 +50,7 @@ public class TestExample {
     
         // Check the contents of the list
         assertEquals(50.00, getTotalCost(), 0.01);
+        // assertTrue(false);
     }
 
 
@@ -75,6 +76,26 @@ public class TestExample {
         // Check the total cost after removing the transaction
         double totalCost = getTotalCost();
         assertEquals(0.00, totalCost, 0.01);
+    }
+
+    @Test
+    public void testAddMultipleTransactions(){
+
+        assertEquals(0, model.getTransactions().size());
+
+        // assertEquals(0.0, getTotalCost()) is depricated, need to add delta parameter
+        assertEquals(0.0, getTotalCost(),0.01);
+
+        controller.addTransaction(50, "food");
+        controller.addTransaction(837.5, "travel");
+        controller.addTransaction(79.99, "entertainment");
+        controller.addTransaction(50, "bills");
+
+
+        // expected sum is 1017.49
+        assertEquals(1017.49, getTotalCost(), 0.01);
+
+        assertEquals(4, model.getTransactions().size());
     }
     
 }
