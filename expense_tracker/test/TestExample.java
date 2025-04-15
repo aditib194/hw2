@@ -127,6 +127,9 @@ public class TestExample {
 
         AmountFilter test = new AmountFilter(100);
         List<Transaction> filteredTransactions = test.filter(model.getTransactions());
+        
+
+        assertEquals(3, filteredTransactions.size());
 
         assertEquals("food", filteredTransactions.get(0).getCategory());
         assertEquals(50, filteredTransactions.get(0).getAmount(), 0.01);
@@ -137,7 +140,28 @@ public class TestExample {
         assertEquals("bills", filteredTransactions.get(2).getCategory());
         assertEquals(50, filteredTransactions.get(2).getAmount(), 0.01);
 
-        assertEquals(3, filteredTransactions.size());
+
+    }
+
+    @Test
+    public void testFilterByCategory(){
+
+        assertEquals(0, model.getTransactions().size());
+        assertEquals(0.0, getTotalCost(), 0.01);
+
+        controller.addTransaction(50, "food");
+        controller.addTransaction(837.5, "travel");
+        controller.addTransaction(79.99, "entertainment");
+        controller.addTransaction(50, "food");
+
+        CategoryFilter test = new CategoryFilter("food");
+        List<Transaction> filteredTransactions = test.filter(model.getTransactions());
+
+        assertEquals(2, filteredTransactions.size());
+
+        for (Transaction transaction : filteredTransactions){
+            assertEquals("food", transaction.getCategory());
+        }
 
     }
 
